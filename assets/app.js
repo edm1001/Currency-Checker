@@ -2,11 +2,12 @@
 const api = "https://v6.exchangerate-api.com/v6/43f6ab4d2d11aac016a3a298/latest/USD"
 
 // connect the variables with HTML
-const search = document.querySelector(".searchVal");
-const convertBtn = document.querySelector(".convert");
-const convertFrom = document.querySelector(".from");
-const convertTo = document.querySelector(".to");
-const convertedVal = document.querySelector(".converted");
+let search = document.querySelector(".searchVal");
+let convertBtn = document.querySelector(".convert");
+let convertFrom = document.querySelector(".from");
+let convertTo = document.querySelector(".to");
+let convertedVal = document.querySelector(".converted");
+let finalAmount = document.querySelector(".final-amount")
 
 // create variables thta compare
 let resultFrom ;
@@ -14,13 +15,16 @@ let resultTo;
 let searchCurrency;
 
 // event that changes currency from
-convertFrom.addEventListener('change', (e) => {
-    resultFrom = `${e.target.value}`;
+convertFrom.addEventListener('change', (event) => {
+    resultFrom = `${event.target.value}`;
 });
 // event that changes currency to
-convertTo.addEventListener('change', (e) => {
-    resultTo = `${e.target.value}`;
+convertTo.addEventListener('change', (event) => {
+    resultTo = `${event.target.value}`;
 });
+
+search.addEventListener('input', updateValue);
+
 // for when value is updated
 function updateValue(e) {
     searchValue = e.target.value;
@@ -33,5 +37,14 @@ function getResults() {
     fetch(`${api}`)
         .then(currency => {
             return currency.json();
-        }).then(displayResults)
+        }).then(displayResults);
+}
+
+// display the results 
+function displayResults(currency) {
+    let fromRate = currency.rates[resultFrom];
+    let toRate = currency.rates[resultTo];
+    convertedVal.innerHTML = ((toRate/fromRate) * searchValue).toFixed(2);
+    finalAmount.style.display = "block";
+
 }
