@@ -42,9 +42,9 @@ function getResults() {
 
 // display the results 
 function displayResults(currency) {
-    let fromRate = currency.rates[resultFrom];
-    let toRate = currency.rates[resultTo];
-    convertedVal.innerHTML = ((toRate/fromRate) * searchValue).toFixed(2);
+    let fromRate = currency.conversion_rates[resultFrom];
+    let toRate = currency.conversion_rates[resultTo];
+    convertedVal.innerHTML = ((toRate/fromRate) * searchCurrency).toFixed(2);
     finalAmount.style.display = "block";
 
 }
