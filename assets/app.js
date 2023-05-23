@@ -44,7 +44,7 @@ function getResults() {
 function displayResults(currency) {
     let fromRate = currency.conversion_rates[resultFrom];
     let toRate = currency.conversion_rates[resultTo];
-    convertedVal.innerHTML = ((toRate/fromRate) * searchCurrency).toFixed(2);
+    convertedVal.innerHTML = ((toRate / fromRate) * searchCurrency).toFixed(2);
     finalAmount.style.display = "block";
 
 }
