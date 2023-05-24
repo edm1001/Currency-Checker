@@ -35,16 +35,18 @@ convertBtn.addEventListener("click", getResults);
 // use the Api to get conversion results
 function getResults() {
     fetch(`${api}`)
-        .then(currency => {
-            return currency.json();
+        .then(result => {
+            return result.json();
         }).then(displayResults);
 }
 
 // display the results 
-function displayResults(currency) {
-    let fromRate = currency.conversion_rates[resultFrom];
-    let toRate = currency.conversion_rates[resultTo];
+function displayResults(result) {
+    let fromRate =result.conversion_rates[resultFrom.value];
+    let toRate = result.conversion_rates[resultTo.value];
     convertedVal.innerHTML = ((toRate / fromRate) * searchCurrency).toFixed(2);
     finalAmount.style.display = "block";
-
+    
 }
+console.log(displayResults());
+console.log(finalAmount)
